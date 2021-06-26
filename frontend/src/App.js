@@ -8,7 +8,7 @@ function App() {
   useEffect(() => {
     WebFont.load({
         google: {
-            families: ['Inter']
+            families: ['Karla', 'Karla:bold']
         }
     });
   }, []);
@@ -18,7 +18,6 @@ function App() {
       <h1 className="title">Minimal Todo List</h1>
       <span className="subtitle">(Made with React)</span>
       <AddTodo />
-      <TodoList />
     </div>
   );
 }

@@ -1,0 +1,10 @@
+.horizontalLine {
+    background-color: #394144;
+    height: 2px;
+    width: 100%;
+    
+}
+
+.todoItemContainer {
+    padding: 20px;
+}

@@ -1,0 +1,23 @@
+form {
+    margin-top: 25px;
+    padding: 15px 20px;
+    background-color: #22282C;
+    border-radius: 10px;
+}
+
+.todoToAdd {
+    border: none;
+    font-family: Karla, Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    background-color: inherit;
+    color: #5E676B;
+    width: 100%;
+}
+
+::placeholder {
+    color: #5E676B;
+}
+
+.todoToAdd:focus {
+    outline: none;
+}
