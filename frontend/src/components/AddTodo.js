@@ -16,15 +16,19 @@ class AddTodo extends React.Component {
     }
 
     addTodoToList(e) {
+        // Adds the new todo to a new array
         const newTodoList = this.state.todos.concat(this.state.todoToAdd);
 
+        // Updating the state with the new array
         this.setState({
+            todoToAdd: '',
             todos: newTodoList
         });
 
         e.preventDefault();
     }
 
+    // Updates the todo with the user input
     updateValue(e) {
         this.setState({
             todoToAdd: e.target.value
@@ -32,7 +36,6 @@ class AddTodo extends React.Component {
     }
 
     render() {
-        let noTodosMessage = <p>You currently have no todos!</p>
         return (
             <div>
                 <form onSubmit={this.addTodoToList}>

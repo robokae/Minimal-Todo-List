@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import AddTodo from './components/AddTodo';
-import TodoList from './components/TodoList';
 import WebFont from 'webfontloader';
 
 function App() {
+  // Load Google fonts
   useEffect(() => {
     WebFont.load({
         google: {

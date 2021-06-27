@@ -9,13 +9,24 @@ class TodoList extends React.Component {
 
     render() {
         let noTodosMessage = <p className="noTodosMessage">You currently do not have any todos!</p>;
-
+        let todosLength = this.props.todos.length;
+        
         return (
             <div className="todoList">
-                <h2 className="subheading">Todos</h2>
-                {this.props.todos.length == 0 
-                    ? noTodosMessage 
-                    : this.props.todos.map((todoEntry) => <Todo todoEntry={todoEntry} />
+                <h2 className="subheading">
+                    {/* Display gramatically correct string */}
+                    {todosLength == 0 ? '' : todosLength + ' '}                 
+                    {todosLength <= 1 ? 'Todo' : ' Todos'}</h2>
+                {todosLength === 0 
+                    ? noTodosMessage                                            // Display no todos message if no todos in array
+                    : this.props.todos.map((todoEntry) =>                       // Else, display each todo
+                        <Todo 
+                            todoEntry={todoEntry} 
+                            displayLine={todoEntry === this.props.todos[0]      // Display the top horizontal line for the first todo only
+                                ? true
+                                : false
+                            }
+                        />
                 )}
             </div>
         );
