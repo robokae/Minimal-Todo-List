@@ -5,13 +5,15 @@ import './index.css';
 
 // Font Awesome icons
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { fab } from '@fortawesome/free-solid-svg-icons';
+// import { fab } from '@fortawesome/free-solid-svg-icons';
+
 import { 
+  faThumbsUp,
   faTrash,
   faEllipsisH
  } from '@fortawesome/free-solid-svg-icons';
 
- import { faThumbsUp, faStar } from '@fortawesome/free-regular-svg-icons';
+import { faStar } from '@fortawesome/free-regular-svg-icons';
 
 library.add(
   faThumbsUp,

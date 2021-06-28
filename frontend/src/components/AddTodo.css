@@ -10,7 +10,8 @@ form {
     font-family: Karla, Arial, Helvetica, sans-serif;
     font-size: 1rem;
     background-color: inherit;
-    color: #5E676B;
+    /* color: #5E676B; */
+    color: #F5F5F5;
     width: 100%;
 }
 

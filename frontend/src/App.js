@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <h1 className="title">Minimal Todo List</h1>
-      <span className="subtitle">(Made with React)</span>
+      {/* <span className="subtitle">(Made with React)</span> */}
       <AddTodo />
     </div>
   );
