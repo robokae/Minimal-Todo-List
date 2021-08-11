@@ -1,5 +1,5 @@
 import React from 'react';
-import './TodoList.css';
+import './styles/TodoList.css';
 import Todo from './Todo';
 
 class TodoList extends React.Component {
@@ -63,6 +63,8 @@ class TodoList extends React.Component {
                     {message}               
                 </h2>
                 {/* <div className="horizontalLine"></div> */}
+                <div className="verticalLine"></div>
+                <h2 className="subheading completedSubheading">Completed</h2>
                 {todosLength === 0 
                     ? noTodosMessage                                                            // Display no todos message if no todos in array
                     : this.props.todos.map((todoEntry, index) =>                                // Else, display each todo

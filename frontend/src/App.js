@@ -8,16 +8,18 @@ function App() {
   useEffect(() => {
     WebFont.load({
         google: {
-            families: ['Karla', 'Karla:bold']
+            families: ['Inter', 'Inter:bold']
         }
     });
   }, []);
   
   return (
     <div className="App">
-      <h1 className="title">Minimal Todo List</h1>
-      {/* <span className="subtitle">(Made with React)</span> */}
-      <AddTodo />
+      <div className="container">
+        <h1 className="title">{Date().toLocaleString()}</h1>
+        {/* <span className="subtitle">(Made with React)</span> */}
+        <AddTodo />
+      </div>
     </div>
   );
 }

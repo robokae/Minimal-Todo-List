@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './Todo.css';
+import './styles/Todo.css';
 
 class Todo extends React.Component {
     constructor(props) {
@@ -33,8 +33,8 @@ class Todo extends React.Component {
     }
 
     changeVisibility() {
-        // let todoItemContainer = this.todoItemContainerRef.current;
-        // let deleteButton = this.deleteButtonRef.current;
+        let todoItemContainer = this.todoItemContainerRef.current;
+        let deleteButton = this.deleteButtonRef.current;
 
         // let todoItemContainerXPosRight = todoItemContainer.getBoundingClientRect().right;
         // let deleteButtonXPos = deleteButton.getBoundingClientRect().left;
@@ -43,13 +43,13 @@ class Todo extends React.Component {
         if (this.state.visibility === "invisible") {
             this.setState({
                 visibility: "visible",
-                animation: "animateOpen"
+                // animation: "animateOpen"
             });
         }
         else {
             this.setState({
                 visibility: "invisible",
-                animation: "animateClose"
+                // animation: "animateClose"
             });
         }
     }
@@ -65,7 +65,7 @@ class Todo extends React.Component {
                     <div className={this.props.todoEntry.completed ? "todoItemCompleted" : "todoItemNotCompleted"}>{this.props.todoEntry.todo}</div>
                     <div className="todoOptionsContainer">
                         <FontAwesomeIcon icon={["far","star"]} className="starIcon" />
-                        <FontAwesomeIcon icon={["fas", "trash"]} className="trashIcon" onClick={this.changeVisibility}/>
+                        <FontAwesomeIcon icon={["fas", "trash"]} className="trashIcon" onClick={this.changeVisibility} onMove/>
                         <FontAwesomeIcon icon={["fas", "ellipsis-h"]} className="ellipsisIcon" />
                     </div>
                     <div className={"deleteOptions " + this.state.visibility + " " + this.state.animation}>

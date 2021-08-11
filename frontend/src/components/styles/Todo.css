@@ -1,0 +1,141 @@
+.horizontalLine {
+    background-color: #2A3134;
+    /* opacity: 0.5; */
+    height: 1px;
+    width: 100%;
+}
+
+.todoItemContainer {
+    padding: 20px;
+    display: flex;
+    position: relative;
+    z-index: 0;
+}
+
+.todoItemContainer:hover, 
+.todoItemContainer:hover > *, 
+.todoItemContainer:hover > * > *:not(.deleteButton, .cancelDeleteButton) {
+    background-color: #22282C;
+}
+
+.thumbsUpIcon, 
+.starIcon, 
+.trashIcon, 
+.ellipsisIcon {
+    color: #394144;
+}
+
+.thumbsUpIcon:hover, 
+.thumbsUpIconCompleted:hover, 
+.starIcon:hover, 
+.trashIcon:hover, 
+.ellipsisIcon:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.thumbsUpIcon:active, 
+.thumbsUpIconCompleted:active, 
+.starIcon:active, 
+.trashIcon:active, 
+.ellipsisIcon:active {
+    transform: scale(0.90);
+}
+
+.thumbsUpIcon {
+    width: 5%;
+}
+
+.thumbsUpIconCompleted {
+    background-color: inherit;
+    color: #38A7D3;
+}
+
+.todoItemNotCompleted, 
+.todoItemCompleted {
+    padding: 0 20px;
+    width: 80%;
+}
+
+.todoItemNotCompleted {
+    text-decoration: none;
+}
+
+.todoItemCompleted {
+    text-decoration: line-through; 
+    color: #394144;
+}
+
+.todoOptionsContainer {
+    width: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    opacity: 1;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.animateOpen, 
+.animateClose {
+    transition: 0.2s transform ease-out;
+}
+
+.animateOpen {
+    transform-origin: left;
+    transform: translateX(0%);
+    
+}
+
+.animateClose {
+
+    transform: translateX(+100%);
+}
+
+.deleteOptions {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 20%;
+}
+
+.deleteButton, 
+.cancelDeleteButton {
+    display: inline-block;
+    height: calc(100% + 2px);
+    width: 50%;
+    border: transparent;
+    color: #F5F5F5;
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.deleteButton:hover, 
+.cancelDeleteButton:hover {
+    opacity: 0.85;
+}
+
+.deleteButton:active,
+.cancelDeleteButton:active {
+    opacity: 0.75;
+}
+
+.deleteButton {
+    background-color: #C54949;
+}
+
+.cancelDeleteButton {
+    background-color: #2A3134;
+}

@@ -1,8 +1,8 @@
-.App {
+.container {
   height: 70vh;
   width: 50vw;
   color: #F5F5F5;
-  font-family: Karla, Arial, Helvetica, sans-serif;
+  font-family: Inter, Arial, Helvetica, sans-serif;
   position: absolute;
   top: 50%;
   left: 50%;

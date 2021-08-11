@@ -1,5 +1,5 @@
 import React from 'react';
-import './AddTodo.css';
+import './styles/AddTodo.css';
 import TodoList from './TodoList';
 
 class AddTodo extends React.Component {

@@ -1,0 +1,27 @@
+.todoList {
+    margin-top: 50px;
+    position: relative;
+}
+
+.noTodosMessage {
+    position: absolute;
+    color: #5E676B;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.subheading {
+    margin-bottom: 25px;
+    font-size: 1.25rem;
+}
+
+.subheading, .verticalLine, .completedSubheading {
+    display: inline-block;
+}
+
+.verticalLine {
+    height: 20px;
+    width: 1px;
+    background-color: #2A3134;
+    margin: 0 5%;
+}
