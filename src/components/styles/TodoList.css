@@ -8,6 +8,7 @@
     color: #5E676B;
     left: 50%;
     transform: translateX(-50%);
+    margin-top: 5rem;
 }
 
 .subheading {
@@ -17,6 +18,10 @@
 
 .subheading, .verticalLine, .completedSubheading {
     display: inline-block;
+}
+
+.completedSubheading {
+    color: #5E676B;
 }
 
 .verticalLine {
