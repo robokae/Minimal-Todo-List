@@ -1,86 +1,59 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './styles/Todo.css';
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./styles/Todo.css";
 
-class Todo extends React.Component {
-    constructor(props) {
-        super(props);
+const Todo = ({ todoEntry }) => {
+  const [showDeleteOptions, setShowDeleteOptions] = useState(false);
+  const [completed, setCompleted] = useState(false);
 
-        this.state = {
-            visibility: "invisible",
-            animation: ""
-        };
+  const updateTodoStatus = () => {
+    setCompleted(!completed);
+  };
 
-        this.todoItemContainerRef = React.createRef();
-        this.deleteButtonRef = React.createRef();
+  const handleDeleteButtonClick = () => {
+    setShowDeleteOptions(!showDeleteOptions);
+  };
 
-        this.updateTodoStatus = this.updateTodoStatus.bind(this);
-        this.changeVisibility = this.changeVisibility.bind(this);
-    }
-
-    updateTodoStatus(e) {
-        if (this.props.todoEntry.completed === false) {
-            this.props.todoEntry.completed = true;
-            this.props.addTodoToComplete(this.props.todoIndex);
-        } 
-        
-        else {
-            this.props.todoEntry.completed = false;
-            this.props.removeTodoFromComplete(this.props.todoIndex);
-        }
-
-        e.preventDefault();
-    }
-
-    changeVisibility() {
-        let todoItemContainer = this.todoItemContainerRef.current;
-        let deleteButton = this.deleteButtonRef.current;
-
-        // let todoItemContainerXPosRight = todoItemContainer.getBoundingClientRect().right;
-        // let deleteButtonXPos = deleteButton.getBoundingClientRect().left;
-        // alert(todoItemContainerXPosRight + ", " + deleteButtonXPos);
-
-        if (this.state.visibility === "invisible") {
-            this.setState({
-                visibility: "visible",
-                // animation: "animateOpen"
-            });
-        }
-        else {
-            this.setState({
-                visibility: "invisible",
-                // animation: "animateClose"
-            });
-        }
-    }
-
-    render() {
-        return (
-            <div>
-                {/* Display top horizontal line for the first todo only */}
-                {this.props.displayLine === true && <div className="horizontalLine"></div>}         
-                <div className="todoItemContainer" ref={this.todoItemContainerRef}>
-                    <FontAwesomeIcon icon={'thumbs-up'} className={this.props.todoEntry.completed ? "thumbsUpIconCompleted" : "thumbsUpIcon"} onClick={this.updateTodoStatus}/>
-                    {/* Display strike through todo when completed */}
-                    <div className={this.props.todoEntry.completed ? "todoItemCompleted" : "todoItemNotCompleted"}>{this.props.todoEntry.todo}</div>
-                    <div className="todoOptionsContainer">
-                        <FontAwesomeIcon icon={["far","star"]} className="starIcon" />
-                        <FontAwesomeIcon icon={["fas", "trash"]} className="trashIcon" onClick={this.changeVisibility} onMove/>
-                        <FontAwesomeIcon icon={["fas", "ellipsis-h"]} className="ellipsisIcon" />
-                    </div>
-                    <div className={"deleteOptions " + this.state.visibility + " " + this.state.animation}>
-                        {/* <div className="deleteButtonContainer"> */}
-                            <button className="deleteButton" ref={this.deleteButtonRef}>Delete</button>
-                        {/* </div> */}
-                        {/* <div className="cancelDeleteButtonContainer"> */}
-                            <button className="cancelDeleteButton" onClick={this.changeVisibility}>Cancel</button>
-                        {/* </div> */}
-                    </div>
-                </div>
-                <div className="horizontalLine"></div>
-            </div>
-        );
-    }
-}
+  return (
+    <div>
+      <div className="todoItemContainer">
+        <FontAwesomeIcon
+          icon={"thumbs-up"}
+          className={completed ? "thumbsUpIconCompleted" : "thumbsUpIcon"}
+          onClick={updateTodoStatus}
+        />
+        {/* Display strike through todo when completed */}
+        <div
+          className={completed ? "todoItemCompleted" : "todoItemNotCompleted"}
+        >
+          {todoEntry.todo}
+        </div>
+        <div className="todoOptionsContainer">
+          <FontAwesomeIcon icon={["far", "star"]} className="starIcon" />
+          <FontAwesomeIcon
+            icon={["fas", "trash"]}
+            className="trashIcon"
+            onClick={handleDeleteButtonClick}
+          />
+          <FontAwesomeIcon
+            icon={["fas", "ellipsis-h"]}
+            className="ellipsisIcon"
+          />
+        </div>
+        {showDeleteOptions && (
+          <div className={"deleteOptions"}>
+            <button className="deleteButton">Delete</button>
+            <button
+              className="cancelDeleteButton"
+              onClick={handleDeleteButtonClick}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default Todo;
