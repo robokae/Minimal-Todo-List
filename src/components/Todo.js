@@ -18,8 +18,8 @@ const Todo = ({ todo, todoIndex, deleteTodo }) => {
     <div>
       <div className="todoItemContainer">
         <FontAwesomeIcon
-          icon={"thumbs-up"}
-          className={completed ? "thumbsUpIconCompleted" : "thumbsUpIcon"}
+          icon={completed ? "check-square" : ["far", "square"]}
+          className={completed ? "checkboxIconCompleted" : "checkboxIcon"}
           onClick={updateTodoStatus}
         />
         {/* Display strike through todo when completed */}
