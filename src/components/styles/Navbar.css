@@ -1,5 +1,7 @@
 .navbarContainer {
-    display: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     position: relative;
     top: 0;
     left: 0;
