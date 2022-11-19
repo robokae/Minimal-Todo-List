@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./styles/Todo.css";
+import "../styles/Todo.css";
 
 const Todo = ({ todo, todoIndex, deleteTodo }) => {
   const [showDeleteOptions, setShowDeleteOptions] = useState(false);

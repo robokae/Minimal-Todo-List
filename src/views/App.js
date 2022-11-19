@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import Navbar from "./components/Navbar";
-import AddTodo from "./components/AddTodo";
+import "../styles/App.css";
+import Navbar from "../components/Navbar";
+import AddTodo from "../components/AddTodo";
 import WebFont from "webfontloader";
-import TodoList from "./components/TodoList";
+import TodoList from "../components/TodoList";
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
