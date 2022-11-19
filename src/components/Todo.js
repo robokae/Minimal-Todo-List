@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "../styles/Todo.css";
 
 const Todo = ({ todo, todoIndex, deleteTodo }) => {
   const [showDeleteOptions, setShowDeleteOptions] = useState(false);
@@ -15,41 +14,39 @@ const Todo = ({ todo, todoIndex, deleteTodo }) => {
   };
 
   return (
-    <div>
-      <div className="todoItemContainer">
+    <div className="todo">
+      <div className="todo__content">
         <FontAwesomeIcon
           icon={completed ? "check-square" : ["far", "square"]}
-          className={completed ? "checkboxIconCompleted" : "checkboxIcon"}
+          className={`todo__icon${completed ? "--highlight" : ""}`}
           onClick={updateTodoStatus}
         />
         {/* Display strike through todo when completed */}
-        <div
-          className={completed ? "todoItemCompleted" : "todoItemNotCompleted"}
-        >
+        <p className={`todo__text${completed ? "--strike-through" : ""}`}>
           {todo}
-        </div>
-        <div className="todoOptionsContainer">
-          <FontAwesomeIcon icon={["far", "star"]} className="starIcon" />
+        </p>
+        <div className="todo__options-container">
+          <FontAwesomeIcon icon={["far", "star"]} className="todo__icon" />
           <FontAwesomeIcon
             icon={["fas", "trash"]}
-            className="trashIcon"
+            className="todo__icon"
             onClick={toggleDisplayDeleteOptions}
           />
           <FontAwesomeIcon
             icon={["fas", "ellipsis-h"]}
-            className="ellipsisIcon"
+            className="todo__icon"
           />
         </div>
         {showDeleteOptions && (
-          <div className={"deleteOptions"}>
+          <div className="todo__delete-options">
             <button
-              className="deleteButton"
+              className="todo__delete-button"
               onClick={() => deleteTodo(todoIndex)}
             >
               Delete
             </button>
             <button
-              className="cancelDeleteButton"
+              className="todo__cancel-button"
               onClick={toggleDisplayDeleteOptions}
             >
               Cancel

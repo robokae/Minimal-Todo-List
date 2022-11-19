@@ -1,0 +1,15 @@
+@import "../abstracts/variables";
+
+.add-todo {
+    &__input-form {
+        padding: $input-padding;
+        background-color: $input-bg-color;
+        border-radius: $border-radius;
+    }
+
+    &__text-input {
+        border: none;
+        background-color: inherit;
+        width: 100%;
+    }
+}

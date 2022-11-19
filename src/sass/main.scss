@@ -1,0 +1,12 @@
+@import "abstracts/all";
+@import "components/all";
+@import "core/all";
+@import "layout/all";
+@import "themes/all";
+@import "views/all";
+
+* {
+    margin: 0;
+    padding: 0;
+    background-color: $primary-bg-color;
+}

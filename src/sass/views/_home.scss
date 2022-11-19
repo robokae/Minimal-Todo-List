@@ -1,0 +1,14 @@
+.home {
+  height: max-content;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  &__content {
+    width: 60%;
+    padding: 3rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}

@@ -1,0 +1,97 @@
+@import "../abstracts/variables";
+
+.todo {
+    width: 100%;
+
+    &__content {
+        display: flex;
+        padding: $padding;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+
+        &:hover, 
+        &:hover > * {
+            background-color: $secondary-bg-color;
+        }
+    }
+
+    &__icon {
+        width: max-content;
+        background-color: inherit;
+        color: $secondary-font-color;
+        cursor: pointer;
+
+        &--highlight {
+            color: $success-color;
+        }
+
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        &:active {
+            transform: scale(.9);
+        }
+    }
+
+    &__text {
+        flex: 1;
+
+        &--strike-through {
+            flex: 1;
+            color: $secondary-font-color;
+            text-decoration: line-through;
+        }
+    }
+
+    &__options-container {
+        width: max-content;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    &__delete-options {
+        width: max-content;
+        height: 100%;
+        display: inline-flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    &__delete-button, 
+    &__cancel-button {
+        width: 50%;
+        height: 100%;
+        padding: 0 1rem;
+        display: inline-block;
+        border: transparent;
+        cursor: pointer;
+
+        &:hover, 
+        &:hover {
+            opacity: .85;
+        }
+
+        &:active,
+        &:active {
+            opacity: .75;
+        }
+    }
+
+    &__delete-button {
+        background-color: $warning-color;
+    }
+
+    &__cancel-button {
+        background-color: $neutral-color;
+    }
+}

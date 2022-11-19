@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../styles/AddTodo.css";
 
 const AddTodo = ({ addTodo }) => {
   const [todoToAdd, setTodoToAdd] = useState("");
@@ -9,8 +8,9 @@ const AddTodo = ({ addTodo }) => {
   };
 
   return (
-    <div>
+    <div className="add-todo">
       <form
+        className="add-todo__input-form"
         onSubmit={(e) => {
           e.preventDefault();
           addTodo(todoToAdd);
@@ -20,7 +20,7 @@ const AddTodo = ({ addTodo }) => {
         <input
           type="text"
           onChange={updateTodo}
-          className="todoToAdd"
+          className="add-todo__text-input"
           value={todoToAdd}
           placeholder="Add a todo"
           autoComplete="off"
