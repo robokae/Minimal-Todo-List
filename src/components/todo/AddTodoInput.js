@@ -8,18 +8,21 @@ const AddTodoInput = () => {
   const dispatch = useDispatch();
 
   const addTodoToList = (e) => {
-    const todo = todoInput.current.value;
     e.preventDefault();
-    dispatch(
-      addTodo({
-        id: uuid(),
-        text: todo,
-        isCompleted: false,
-        isSelected: false,
-        displayDeleteOptions: false,
-      })
-    );
-    todoInput.current.value = "";
+    const todo = todoInput.current.value;
+
+    if (todo !== "") {
+      dispatch(
+        addTodo({
+          id: uuid(),
+          text: todo,
+          isCompleted: false,
+          isSelected: false,
+          displayDeleteOptions: false,
+        })
+      );
+      todoInput.current.value = "";
+    }
   };
 
   return (

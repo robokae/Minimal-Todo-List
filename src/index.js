@@ -18,9 +18,12 @@ import Landing from "./views/Landing";
 import Settings from "./views/Settings";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import { saveState } from "./localStorage";
 
 // Add icons to library so that they can be used globally
 library.add(faSquare, faCheckSquare, faStar, faTrash, faEllipsisH);
+
+store.subscribe(() => saveState(store.getState()));
 
 const router = createBrowserRouter([
   {
