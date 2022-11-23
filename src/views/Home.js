@@ -1,18 +1,8 @@
-import React, { useState } from "react";
-import AddTodo from "../components/AddTodo";
-import TodoList from "../components/TodoList";
+import React from "react";
+import AddTodo from "../components/todo/AddTodoInput";
+import TodoList from "../components/todo/TodoList";
 
 const Home = () => {
-  const [todoList, setTodoList] = useState([]);
-
-  const addTodo = (todoToAdd) => {
-    setTodoList((currentTodos) => [...currentTodos, todoToAdd]);
-  };
-
-  const deleteTodo = (todoIndex) => {
-    setTodoList(todoList.filter((todo, index) => index !== todoIndex));
-  };
-
   // Determining the time of day (morning, afternoon, or evening)
   const getTimeOfDay = () => {
     const hour = new Date().getHours();
@@ -30,8 +20,8 @@ const Home = () => {
     <div className="home">
       <div className="home__content">
         <h2 className="home__heading">Good {getTimeOfDay()}</h2>
-        <AddTodo addTodo={addTodo} />
-        <TodoList todoList={todoList} deleteTodo={deleteTodo} />
+        <AddTodo />
+        <TodoList />
       </div>
     </div>
   );

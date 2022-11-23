@@ -1,53 +1,51 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch } from "react-redux";
+import {
+  deleteTodo,
+  setCompleted,
+  setDisplayDeleteOptions,
+} from "../../features/todos/todosSlice";
 
-const Todo = ({ todo, todoIndex, deleteTodo }) => {
-  const [showDeleteOptions, setShowDeleteOptions] = useState(false);
-  const [completed, setCompleted] = useState(false);
-
-  const updateTodoStatus = () => {
-    setCompleted(!completed);
-  };
-
-  const toggleDisplayDeleteOptions = () => {
-    setShowDeleteOptions(!showDeleteOptions);
-  };
+const Todo = ({ todo }) => {
+  const { text, isCompleted, displayDeleteOptions } = todo;
+  const dispatch = useDispatch();
 
   return (
     <div className="todo">
       <div className="todo__content">
         <FontAwesomeIcon
-          icon={completed ? "check-square" : ["far", "square"]}
-          className={`todo__icon${completed ? "--highlight" : ""}`}
-          onClick={updateTodoStatus}
+          icon={isCompleted ? "check-square" : ["far", "square"]}
+          className={`todo__icon${isCompleted ? "--highlight" : ""}`}
+          onClick={() => dispatch(setCompleted(todo))}
         />
         {/* Display strike through todo when completed */}
-        <p className={`todo__text${completed ? "--strike-through" : ""}`}>
-          {todo}
+        <p className={`todo__text${isCompleted ? "--strike-through" : ""}`}>
+          {text}
         </p>
         <div className="todo__options-container">
           <FontAwesomeIcon icon={["far", "star"]} className="todo__icon" />
           <FontAwesomeIcon
             icon={["fas", "trash"]}
             className="todo__icon"
-            onClick={toggleDisplayDeleteOptions}
+            onClick={() => dispatch(setDisplayDeleteOptions(todo))}
           />
           <FontAwesomeIcon
             icon={["fas", "ellipsis-h"]}
             className="todo__icon"
           />
         </div>
-        {showDeleteOptions && (
+        {displayDeleteOptions && (
           <div className="todo__delete-options">
             <button
               className="todo__delete-button"
-              onClick={() => deleteTodo(todoIndex)}
+              onClick={() => dispatch(deleteTodo(text))}
             >
               Delete
             </button>
             <button
               className="todo__cancel-button"
-              onClick={toggleDisplayDeleteOptions}
+              onClick={() => dispatch(setDisplayDeleteOptions(todo))}
             >
               Cancel
             </button>

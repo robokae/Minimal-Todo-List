@@ -1,6 +1,8 @@
 @import "../abstracts/variables";
 
 .add-todo {
+    position: sticky;
+    z-index: 1;
     &__input-form {
         padding: $input-padding;
         background-color: $input-bg-color;
