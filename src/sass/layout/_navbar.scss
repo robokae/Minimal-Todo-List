@@ -11,4 +11,29 @@
     height: $navbar-height;
     border-bottom: $border;
     z-index: 2;
+
+    &__content {
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__search-bar-form {
+        padding: .25rem 1rem;
+        border: $border;
+        border-radius: $border-radius;
+    }
+
+    &__search-bar-input {
+        width: max-content;
+        outline: none;
+        border: transparent;
+    }
+
+    &__search-bar-close-button {
+        color: $secondary-font-color;
+        cursor: pointer;
+    }
 }

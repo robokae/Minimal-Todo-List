@@ -7,6 +7,7 @@ import {
   faCheckSquare,
   faTrash,
   faEllipsisH,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar, faSquare } from "@fortawesome/free-regular-svg-icons";
 import "./sass/main.scss";
@@ -21,7 +22,7 @@ import { store } from "./store";
 import { saveState } from "./localStorage";
 
 // Add icons to library so that they can be used globally
-library.add(faSquare, faCheckSquare, faStar, faTrash, faEllipsisH);
+library.add(faSquare, faCheckSquare, faStar, faTrash, faEllipsisH, faTimes);
 
 store.subscribe(() => saveState(store.getState()));
 

@@ -17,7 +17,7 @@ const Todo = ({ todo }) => {
         <FontAwesomeIcon
           icon={isCompleted ? "check-square" : ["far", "square"]}
           className={`todo__icon${isCompleted ? "--highlight" : ""}`}
-          onClick={() => dispatch(setCompleted(todo))}
+          onClick={() => dispatch(setCompleted(todo.id))}
         />
         {/* Display strike through todo when completed */}
         <p className={`todo__text${isCompleted ? "--strike-through" : ""}`}>
@@ -28,7 +28,7 @@ const Todo = ({ todo }) => {
           <FontAwesomeIcon
             icon={["fas", "trash"]}
             className="todo__icon"
-            onClick={() => dispatch(setDisplayDeleteOptions(todo))}
+            onClick={() => dispatch(setDisplayDeleteOptions(todo.id))}
           />
           <FontAwesomeIcon
             icon={["fas", "ellipsis-h"]}
@@ -39,13 +39,13 @@ const Todo = ({ todo }) => {
           <div className="todo__delete-options">
             <button
               className="todo__delete-button"
-              onClick={() => dispatch(deleteTodo(text))}
+              onClick={() => dispatch(deleteTodo(todo.id))}
             >
               Delete
             </button>
             <button
               className="todo__cancel-button"
-              onClick={() => dispatch(setDisplayDeleteOptions(todo))}
+              onClick={() => dispatch(setDisplayDeleteOptions(todo.id))}
             >
               Cancel
             </button>

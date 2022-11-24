@@ -4,18 +4,30 @@ export const todosSlice = createSlice({
   name: "todos",
   initialState: {
     todos: [],
+    searchResults: [],
+    isSearch: false,
   },
   reducers: {
     addTodo: (state, action) => {
       state.todos.push(action.payload);
     },
     deleteTodo: (state, action) => {
-      state.todos = state.todos.filter((todo) => todo.text !== action.payload);
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+    },
+    searchTodo: (state, action) => {
+      const searchPhrase = action.payload.toLowerCase();
+      state.isSearch = true;
+      state.searchResults = state.todos.filter((todo) =>
+        todo.text.toLowerCase().includes(searchPhrase)
+      );
+    },
+    closeSearch: (state) => {
+      state.isSearch = false;
     },
     setCompleted: (state, action) => {
-      const todo = action.payload;
+      const todoId = action.payload;
       state.todos.forEach((t) => {
-        if (t.id === todo.id) t.isCompleted = !t.isCompleted;
+        if (t.id === todoId) t.isCompleted = !t.isCompleted;
       });
     },
     setSelected: (state, action) => state.selected.push(action.payload),
@@ -23,7 +35,7 @@ export const todosSlice = createSlice({
       state.selected.filter((t) => t.id !== action.payload.id),
     setDisplayDeleteOptions: (state, action) => {
       state.todos.forEach((todo) => {
-        if (todo.id === action.payload.id)
+        if (todo.id === action.payload)
           todo.displayDeleteOptions = !todo.displayDeleteOptions;
       });
     },
@@ -33,6 +45,8 @@ export const todosSlice = createSlice({
 export const {
   addTodo,
   deleteTodo,
+  searchTodo,
+  closeSearch,
   setCompleted,
   setSelected,
   unsetSelected,

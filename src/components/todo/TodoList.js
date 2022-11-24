@@ -3,7 +3,12 @@ import { useSelector } from "react-redux";
 import Todo from "./Todo";
 
 const TodoList = () => {
-  const { todos } = useSelector((state) => state.todos);
+  const todosState = useSelector((state) => state.todos);
+
+  const todos = todosState.isSearch
+    ? todosState.searchResults
+    : todosState.todos;
+
   return (
     <div className="todo-list">
       <div className="todo-list__content">
