@@ -19,6 +19,11 @@ a {
     color: $primary-text-color;
 }
 
+p {
+    padding: 0;
+    margin: 0;
+}
+
 ::placeholder {
     color: $secondary-font-color;
 }

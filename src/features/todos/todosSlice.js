@@ -5,6 +5,7 @@ export const todosSlice = createSlice({
   initialState: {
     todos: [],
     searchResults: [],
+    searchPhrase: "",
     isSearch: false,
   },
   reducers: {
@@ -16,12 +17,14 @@ export const todosSlice = createSlice({
     },
     searchTodo: (state, action) => {
       const searchPhrase = action.payload.toLowerCase();
+      state.searchPhrase = searchPhrase;
       state.isSearch = true;
       state.searchResults = state.todos.filter((todo) =>
         todo.text.toLowerCase().includes(searchPhrase)
       );
     },
     closeSearch: (state) => {
+      state.searchPhrase = "";
       state.isSearch = false;
     },
     setCompleted: (state, action) => {

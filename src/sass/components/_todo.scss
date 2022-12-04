@@ -12,10 +12,10 @@
         gap: 1rem;
         position: relative;
 
-        &:hover, 
-        &:hover > * {
-            background-color: $secondary-bg-color;
-        }
+        // &:hover, 
+        // &:hover > * {
+        //     background-color: $secondary-bg-color;
+        // }
     }
 
     &__icon {
@@ -49,6 +49,7 @@
 
     &__options-container {
         width: max-content;
+        position: relative;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
