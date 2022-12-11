@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
 import { deleteTodo, setCompleted } from "../../features/todos/todosSlice";
 import ReactTooltip from "react-tooltip";
-import popupConfig from "../popup/popupConfig";
+import toolkitConfig from "../../config/toolkitConfig";
 
 const Todo = ({ todo }) => {
   const { text, isCompleted } = todo;
@@ -14,8 +14,10 @@ const Todo = ({ todo }) => {
       <div className="todo__content">
         <FontAwesomeIcon
           icon={isCompleted ? "check-square" : ["far", "square"]}
-          className={`todo__icon${isCompleted ? "--highlight" : ""}`}
-          onClick={() => dispatch(setCompleted(todo.id))}
+          className={`todo__icon${
+            isCompleted ? "--highlight" : ""
+          } todo__icon--square`}
+          onClick={() => dispatch(setCompleted(todo))}
         />
         {/* Display strike through todo when completed */}
         <p className={`todo__text${isCompleted ? "--strike-through" : ""}`}>
@@ -25,7 +27,7 @@ const Todo = ({ todo }) => {
           <div data-tip data-for="starTodoTip">
             <FontAwesomeIcon icon={["far", "star"]} className="todo__icon" />
           </div>
-          <ReactTooltip id="starTodoTip" place="top,bottom" {...popupConfig}>
+          <ReactTooltip id="starTodoTip" place="top,bottom" {...toolkitConfig}>
             Star
           </ReactTooltip>
           <div data-tip data-for="deleteTip">
@@ -35,7 +37,7 @@ const Todo = ({ todo }) => {
               onClick={() => dispatch(deleteTodo(todo.id))}
             />
           </div>
-          <ReactTooltip id="deleteTip" place="top,bottom" {...popupConfig}>
+          <ReactTooltip id="deleteTip" place="top,bottom" {...toolkitConfig}>
             Delete
           </ReactTooltip>
           <div data-tip data-for="optionsTip">
@@ -44,7 +46,7 @@ const Todo = ({ todo }) => {
               className="todo__icon"
             />
           </div>
-          <ReactTooltip id="optionsTip" place="top,bottom" {...popupConfig}>
+          <ReactTooltip id="optionsTip" place="top,bottom" {...toolkitConfig}>
             Options
           </ReactTooltip>
         </div>

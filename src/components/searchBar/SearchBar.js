@@ -25,7 +25,7 @@ const SearchBar = () => {
         onChange={() => {
           searchInput.current.value === ""
             ? dispatch(closeSearch())
-            : dispatch(searchTodo(searchInput.current.value));
+            : dispatch(searchTodo(searchInput.current.value.trim()));
         }}
       />
       <FontAwesomeIcon

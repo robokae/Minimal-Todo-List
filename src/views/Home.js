@@ -1,21 +1,9 @@
 import React from "react";
-import AddTodo from "../components/todo/AddTodoInput";
+import AddTodo from "../components/todo/CreateTodo";
 import TodoList from "../components/todo/TodoList";
+import getTimeOfDay from "../util/getTimeOfDay";
 
 const Home = () => {
-  // Determining the time of day (morning, afternoon, or evening)
-  const getTimeOfDay = () => {
-    const hour = new Date().getHours();
-
-    if (hour >= 0 && hour < 12) {
-      return "Morning";
-    } else if (hour >= 12 && hour < 18) {
-      return "Afternoon";
-    } else {
-      return "Evening";
-    }
-  };
-
   return (
     <div className="home">
       <div className="home__content">

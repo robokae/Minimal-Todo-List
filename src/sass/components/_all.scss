@@ -1,9 +1,9 @@
-@import "addTodo";
-@import "addTodoPopup";
+@import "./todo/createTodo";
+@import "./modal/createTodoModal";
 @import "popupMenu";
 @import "searchBar";
-@import "todo";
-@import "todoList";
+@import "./todo/todo";
+@import "./todo/todoList";
 @import "sidebar";
-@import "todoDetails";
+@import "./todo/todoDetails";
 @import "themeSelector";

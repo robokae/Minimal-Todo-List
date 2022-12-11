@@ -10,6 +10,7 @@ import {
   faTimes,
   faPlus,
   faSearch,
+  faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar, faSquare } from "@fortawesome/free-regular-svg-icons";
 import "./sass/main.scss";
@@ -33,14 +34,15 @@ library.add(
   faTimes,
   faPlus,
   faSearch,
-  faTrash
+  faTrash,
+  faChevronDown
 );
 
 store.subscribe(() => saveState(store.getState()));
 
 const router = createBrowserRouter([
   {
-    path: "/home",
+    path: "/",
     element: <Home />,
   },
   {

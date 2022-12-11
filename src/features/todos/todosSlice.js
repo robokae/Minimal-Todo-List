@@ -28,14 +28,19 @@ export const todosSlice = createSlice({
       state.isSearch = false;
     },
     setCompleted: (state, action) => {
-      const todoId = action.payload;
-      state.todos.forEach((t) => {
-        if (t.id === todoId) t.isCompleted = !t.isCompleted;
-      });
+      const todo = action.payload;
+      state.todos.find((t) => t.id === todo.id).isCompleted = !todo.isCompleted;
+
+      if (state.isSearch)
+        state.searchResults.find((t) => t.id === todo.id).isCompleted =
+          !todo.isCompleted;
     },
-    setSelected: (state, action) => state.selected.push(action.payload),
-    unsetSelected: (state, action) =>
-      state.selected.filter((t) => t.id !== action.payload.id),
+    setSelected: (state, action) => {
+      state.selected.push(action.payload);
+    },
+    unsetSelected: (state, action) => {
+      state.selected.filter((t) => t.id !== action.payload.id);
+    },
     setDisplayDeleteOptions: (state, action) => {
       state.todos.forEach((todo) => {
         if (todo.id === action.payload)

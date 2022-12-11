@@ -1,0 +1,30 @@
+@import "../../abstracts/variables";
+
+.create-todo {
+    z-index: 1;
+
+    &__cta-button {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        padding: $input-padding;
+        border: 1px solid $secondary-font-color;
+        border-radius: $border-radius;
+        // transition: border .2s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            border: 1px solid $success-color;
+
+            & > * {
+                color: $success-color;
+            }
+        }
+    }
+
+    &__icon, &__cta-message {
+        color: $secondary-font-color;
+    }
+}
