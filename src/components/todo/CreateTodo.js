@@ -10,13 +10,13 @@ const CreateTodo = () => {
 
   return (
     <div className="create-todo">
-      <button
+      <div
         className="create-todo__cta-button"
         onClick={() => dispatch(openModal())}
       >
         <FontAwesomeIcon icon={["fas", "plus"]} className="create-todo__icon" />
         <p className="create-todo__cta-message">Add a todo</p>
-      </button>
+      </div>
       {displayModal && <CreateTodoModal />}
     </div>
   );

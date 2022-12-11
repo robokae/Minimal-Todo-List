@@ -9,22 +9,23 @@
         flex-direction: row;
         align-items: center;
         gap: 1rem;
-        padding: $input-padding;
-        border: 1px solid $secondary-font-color;
+        padding: .75rem;
+        background-color: $secondary-bg-color;
         border-radius: $border-radius;
-        // transition: border .2s ease-in-out;
+        box-sizing: border-box;
         cursor: pointer;
 
-        &:hover {
-            border: 1px solid $success-color;
+        // &:hover {
+        //     border: 1px solid $success-color;
 
-            & > * {
-                color: $success-color;
-            }
-        }
+        //     & > * {
+        //         color: $success-color;
+        //     }
+        // }
     }
 
     &__icon, &__cta-message {
+        background-color: $secondary-bg-color;
         color: $secondary-font-color;
     }
 }

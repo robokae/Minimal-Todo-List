@@ -17,15 +17,14 @@
     input, textarea {
         width: 50ch;
         outline: none;
-        background-color: $secondary-bg-color;
         border: 1px solid transparent;
         border-radius: .25rem;
-        padding: .5rem;
     }
 
     &__content {
         width: max-content;
         height: max-content;
+        background-color: $secondary-bg-color;
         position: absolute;
         left: 50%;
         top: 15%;
@@ -34,28 +33,69 @@
         border-radius: .25rem;
         padding: .5rem;
         z-index: 5;
+
+        & * {
+            background-color: inherit;
+        }
     }
 
     &__create-todo-form {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: .5rem;
     }
 
-    &__additional-details {
+    &__create-todo-title-input {
+        padding: .5rem 0;
+    }
+
+    &__warning-message {
+        // padding: 0 .25rem;
+        color: $warning-color;
+    }
+
+    &__optional-details {
+        padding-bottom: .5rem;
         box-sizing: border-box;
         width: 100%;
-        padding: .25rem .5rem;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
-        align-items: center;
-        border: 1px solid transparent;
+        align-items: left;
+        border-top: 1px solid $line-color;
+        border-bottom: 1px solid $line-color;
         outline: none;
-        cursor: pointer;
 
         &:focus {
             border: 1px solid $success-color;
+        }
+    }
+
+    &__optional-details-heading {
+        padding: 1rem 0;
+    }
+
+    &__create-todo-note-input {
+        padding: .5rem;
+        background: $primary-bg-color;
+        resize: none;
+    }
+
+    &__action-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+
+    &__action-button {
+        padding: .5rem 1rem;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        cursor: pointer;
+
+        &--success {
+            background-color: $success-color;
         }
     }
 }
