@@ -20,6 +20,28 @@
         width: 100%;
     }
 
+    &__no-search-results-message {
+        margin: 3rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    &__create-todo-button {
+       padding: .5rem 1rem; 
+       outline: none;
+       border: $border;
+       border-radius: .25rem;
+       transition: all .2s ease-in-out;
+       cursor: pointer;
+
+       &:hover {
+        border: 1px solid $success-color;
+        color: $success-color;
+       }
+    }
+
     &__todo-list-menu {
         padding: .75rem 0;
         display: flex;

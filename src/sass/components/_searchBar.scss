@@ -1,0 +1,22 @@
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    padding: .25rem .75rem;
+    background-color: $secondary-bg-color;
+    border-radius: $border-radius;
+
+    & * {
+        background-color: inherit;
+    }
+
+    &__input {
+        width: max-content;
+        outline: none;
+        border: 1px solid transparent;
+    }
+
+    &__close-button {
+        color: $secondary-font-color;
+        cursor: pointer;
+    }
+}
