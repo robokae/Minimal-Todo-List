@@ -1,13 +1,12 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ReactTooltip from "react-tooltip";
 import toolkitConfig from "../../config/toolkitConfig";
 import { closeSearch, searchTodo } from "../../features/todos/todosSlice";
 
 const SearchBar = () => {
-  const { isSearch } = useSelector((store) => store.todos);
   const dispatch = useDispatch();
   const searchInput = useRef();
 

@@ -1,9 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Todo from "./Todo";
-import SearchBar from "../searchBar/SearchBar";
-import { addTodo, closeSearch } from "../../features/todos/todosSlice";
+import { addTodo, closeSearch } from "../../features/todosSlice";
 import uuid from "react-uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactTooltip from "react-tooltip";
+import toolkitConfig from "../../config/toolkitConfig";
 
 const TodoList = () => {
   const todosState = useSelector((store) => store.todos);
@@ -11,6 +13,7 @@ const TodoList = () => {
   const { isSearch, searchPhrase } = todosState;
 
   const todos = isSearch ? todosState.searchResults : todosState.todos;
+  const numCompleted = todos.filter((todo) => todo.isCompleted).length;
 
   return (
     <div className="todo-list">
@@ -32,24 +35,49 @@ const TodoList = () => {
                       : ""}
                   </p>
                 ) : (
-                  <p>
-                    {`${todos.length} todo${todos.length !== 1 ? "s" : ""}`}
-                  </p>
+                  <div className="todo-list__todo-status">
+                    <p>
+                      {`${todos.length} todo${todos.length !== 1 ? "s" : ""}`}
+                    </p>
+                    <span>&#124;</span>
+                    <p>{`${numCompleted} completed`}</p>
+                  </div>
                 )}
               </div>
-              <SearchBar />
+              <div className="todo-list__options-container">
+                <div data-tip data-for="clearCompletedTip">
+                  <FontAwesomeIcon icon={["fas", "times"]} />
+                </div>
+                <ReactTooltip
+                  id="clearCompletedTip"
+                  place="top,bottom"
+                  {...toolkitConfig}
+                >
+                  Clear Completed
+                </ReactTooltip>
+                <div data-tip data-for="searchTip">
+                  <FontAwesomeIcon icon={["fas", "search"]} />
+                </div>
+                <ReactTooltip
+                  id="searchTip"
+                  place="top,bottom"
+                  {...toolkitConfig}
+                >
+                  Search
+                </ReactTooltip>
+              </div>
+              {/* <SearchBar /> */}
             </div>
             <div className="todo-list__todos">
               {isSearch && todos.length === 0 ? (
                 <div className="todo-list__no-search-results-message">
-                  <p>No matches</p>
                   <button
                     className="todo-list__create-todo-button"
                     onClick={() => {
                       dispatch(
                         addTodo({
                           id: uuid(),
-                          text: searchPhrase,
+                          title: searchPhrase,
                           isCompleted: false,
                           isSelected: false,
                           displayDeleteOptions: false,
@@ -59,7 +87,7 @@ const TodoList = () => {
                       dispatch(closeSearch());
                     }}
                   >
-                    Create Todo for "{searchPhrase}"
+                    Create todo for "{searchPhrase}"
                   </button>
                 </div>
               ) : (

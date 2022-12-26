@@ -31,15 +31,16 @@
     &__create-todo-button {
        padding: .5rem 1rem; 
        outline: none;
-       border: $border;
+       color: $secondary-font-color;
+       border: 1px solid $secondary-font-color;
        border-radius: .25rem;
        transition: all .2s ease-in-out;
        cursor: pointer;
 
-       &:hover {
-        border: 1px solid $success-color;
-        color: $success-color;
-       }
+    //    &:hover {
+    //     border: 1px solid $success-color;
+    //     color: $success-color;
+    //    }
     }
 
     &__todo-list-menu {
@@ -51,11 +52,34 @@
         border-bottom: $border;
     }
 
-    &__clear-completed-todos-button {
+    &__todo-status {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: .5rem;
+
+        span {
+            font-size: 1.25rem;
+            color: $secondary-font-color;
+        }
+    }
+
+    &__options-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1.25rem;
+        cursor: pointer;
+    }
+
+    &__clear-completed-button {
+        font-size: .75rem;
+        text-transform: uppercase;
+        color: $secondary-font-color;
         padding: .25rem .5rem;
         border-radius: .25rem;
-        border: transparent;
-        background-color: $secondary-bg-color;
+        border: 1px solid $secondary-font-color;
         cursor: pointer;
     }
 }

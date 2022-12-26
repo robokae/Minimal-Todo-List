@@ -11,8 +11,10 @@ import {
   faPlus,
   faSearch,
   faChevronDown,
+  faFileAlt,
+  faCalendar,
 } from "@fortawesome/free-solid-svg-icons";
-import { faStar, faSquare } from "@fortawesome/free-regular-svg-icons";
+import { faStar, faSquare, faClock } from "@fortawesome/free-regular-svg-icons";
 import "./sass/main.scss";
 import Error from "./views/ErrorPage";
 import Navbar from "./components/navbar/Navbar";
@@ -35,7 +37,11 @@ library.add(
   faPlus,
   faSearch,
   faTrash,
-  faChevronDown
+  faChevronDown,
+  faTimes,
+  faFileAlt,
+  faCalendar,
+  faClock
 );
 
 store.subscribe(() => saveState(store.getState()));

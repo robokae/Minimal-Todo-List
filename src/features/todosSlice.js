@@ -10,17 +10,23 @@ export const todosSlice = createSlice({
   },
   reducers: {
     addTodo: (state, action) => {
+      console.log(action.payload);
       state.todos.push(action.payload);
     },
     deleteTodo: (state, action) => {
+      if (state.isSearch) {
+        state.searchResults = state.searchResults.filter(
+          (todo) => todo.id !== action.payload
+        );
+      }
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
     searchTodo: (state, action) => {
-      const searchPhrase = action.payload.toLowerCase();
+      const searchPhrase = action.payload;
       state.searchPhrase = searchPhrase;
       state.isSearch = true;
       state.searchResults = state.todos.filter((todo) =>
-        todo.text.toLowerCase().includes(searchPhrase)
+        todo.title.toLowerCase().includes(searchPhrase.toLowerCase())
       );
     },
     closeSearch: (state) => {

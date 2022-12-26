@@ -1,60 +1,59 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState } from "react";
+import { Calendar } from "react-calendar";
 import { useDispatch, useSelector } from "react-redux";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import uuid from "react-uuid";
-import { closeModal } from "../../features/modal/modalSlice";
-import { addTodo } from "../../features/todos/todosSlice";
+import {
+  chooseDate,
+  clearDate,
+  closeDatePicker,
+  openDatePicker,
+} from "../../features/datePickerSlice";
+import { closeCreateTodoModal } from "../../features/modalsSlice";
+import { addTodo } from "../../features/todosSlice";
 
 const CreateTodoModal = () => {
-  const [
-    displayDuplicateTodoWarningMessage,
-    setDisplayDuplicateTodoWarningMessage,
-  ] = useState(false);
-  const { todos } = useSelector((store) => store.todos);
-  const todoInput = useRef();
   const dispatch = useDispatch();
+  const { displayDatePicker, chosenDate } = useSelector(
+    (store) => store.datePicker
+  );
+  const [todoPriority, setTodoPriority] = useState("normal");
+  const [date, setDate] = useState(null);
+  const todoInput = useRef();
+  const todoDetails = useRef("");
+
+  const closeModal = () => {
+    dispatch(clearDate());
+    dispatch(closeCreateTodoModal());
+  };
 
   const addTodoToList = (e) => {
     e.preventDefault();
-    const todoText = todoInput.current.value.trim();
+    const todoTitle = todoInput.current.value.trim();
 
-    if (todoText !== "") {
-      /*
-       * Display an error message when the user tries to create a todo that
-       * already exists
-       * However, if the error message is shown and the user wants to create the
-       * duplicated todo, then allow them to do so
-       */
-      if (
-        todos.findIndex(
-          (todo) => todo.text.toLowerCase() === todoText.toLowerCase()
-        ) !== -1 &&
-        !displayDuplicateTodoWarningMessage
-      ) {
-        setDisplayDuplicateTodoWarningMessage(true);
-        return;
-      }
-
+    if (todoTitle !== "") {
       dispatch(
         addTodo({
           id: uuid(),
-          text: todoText,
+          title: todoTitle,
+          priority: todoPriority,
+          due: chosenDate,
+          note: todoDetails.current.value,
           isCompleted: false,
           isSelected: false,
           displayDeleteOptions: false,
         })
       );
       todoInput.current.value = "";
-      displayDuplicateTodoWarningMessage &&
-        setDisplayDuplicateTodoWarningMessage(false);
-      dispatch(closeModal());
+      closeModal();
     }
   };
 
+  const priorities = ["low", "normal", "medium", "high"];
+
   const handleCloseModal = () => {
-    dispatch(closeModal());
-    displayDuplicateTodoWarningMessage &&
-      setDisplayDuplicateTodoWarningMessage(false);
+    closeModal();
   };
 
   return (
@@ -75,19 +74,86 @@ const CreateTodoModal = () => {
             placeholder="Add a todo (press enter to create)"
             autoFocus="autofocus"
           />
-          {displayDuplicateTodoWarningMessage && (
+          {/* {displayWarningMessage.duplicateTodo && (
             <p className="create-todo-modal__warning-message">
-              Todo already exists (press enter to ignore)
+              {warningMessages.duplicateTodo}
             </p>
-          )}
-          <div className="create-todo-modal__optional-details">
-            <h5 className="create-todo-modal__optional-details-heading">
-              Optional Details
+          )} */}
+          <div className="create-todo-modal__additional-details">
+            <h5 className="create-todo-modal__additional-details__heading">
+              Additional Details
             </h5>
-            <div className="create-todo-modal__input-group">
+            <div className="create-todo-modal__additional-details__priority">
+              <p>Priority:</p>
+              <div className="create-todo-modal__additional-details__priority-options">
+                {priorities.map((priority, index) => (
+                  <div
+                    key={index}
+                    className={`create-todo-modal__additional-details__priority-option ${
+                      priority === todoPriority &&
+                      "create-todo-modal__additional-details__priority-option--selected"
+                    }`}
+                    onClick={() => setTodoPriority(priority)}
+                  >
+                    {priority.charAt(0).toUpperCase() + priority.slice(1)}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="create-todo-modal__additional-details__due-date">
+              <label htmlFor="due-date">Due:</label>
+              <div className="create-todo-modal__additional-details__due-date-inputs">
+                <div
+                  className="create-todo-modal__additional-details__due-date-input"
+                  onClick={() => dispatch(openDatePicker())}
+                >
+                  <p>
+                    {chosenDate === ""
+                      ? "Choose date"
+                      : new Date(chosenDate).toLocaleDateString("en-us", {
+                          weekday: "short",
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                  </p>
+                  <FontAwesomeIcon icon={["fas", "calendar"]} />
+                </div>
+                {displayDatePicker && (
+                  <div className="create-todo-modal__additional-details__due-date-calendar">
+                    <Calendar onChange={setDate} />
+                    <div className="create-todo-modal__additional-details__due-date-calendar-options">
+                      <button
+                        className="create-todo-modal__action-button"
+                        onClick={() => {
+                          dispatch(closeDatePicker());
+                        }}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        className="create-todo-modal__action-button 
+                        create-todo-modal__action-button--success"
+                        onClick={() => {
+                          if (date !== null) {
+                            dispatch(chooseDate(date.toString()));
+                          }
+                          dispatch(closeDatePicker());
+                        }}
+                      >
+                        Done
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="create-todo-modal__additional-details__note">
+              <label htmlFor="details">Note:</label>
               <ReactTextareaAutosize
-                className="create-todo-modal__create-todo-note-input"
-                placeholder="Add an optional note (Markdown supported)"
+                id="details"
+                ref={todoDetails}
+                className="create-todo-modal__additional-details__note-input"
                 minRows={3}
                 maxRows={20}
               />

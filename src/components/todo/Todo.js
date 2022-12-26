@@ -1,12 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
-import { deleteTodo, setCompleted } from "../../features/todos/todosSlice";
+import { deleteTodo, setCompleted } from "../../features/todosSlice";
 import ReactTooltip from "react-tooltip";
 import toolkitConfig from "../../config/toolkitConfig";
 
 const Todo = ({ todo }) => {
-  const { text, isCompleted } = todo;
+  const { title, isCompleted } = todo;
   const dispatch = useDispatch();
 
   return (
@@ -21,7 +21,7 @@ const Todo = ({ todo }) => {
         />
         {/* Display strike through todo when completed */}
         <p className={`todo__text${isCompleted ? "--strike-through" : ""}`}>
-          {text}
+          {title}
         </p>
         <div className="todo__options-container">
           <div data-tip data-for="starTodoTip">
