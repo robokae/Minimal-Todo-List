@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Todo from "./Todo";
-import { addTodo, closeSearch } from "../../features/todosSlice";
+import SearchBar from "../../components/searchBar/SearchBar";
+import {
+  addTodo,
+  closeSearch,
+  hideCompleted,
+  showCompleted,
+} from "../../features/todosSlice";
 import uuid from "react-uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactTooltip from "react-tooltip";
@@ -10,7 +16,8 @@ import toolkitConfig from "../../config/toolkitConfig";
 const TodoList = () => {
   const todosState = useSelector((store) => store.todos);
   const dispatch = useDispatch();
-  const { isSearch, searchPhrase } = todosState;
+  const { isSearch, searchPhrase, displayCompleted } = todosState;
+  const [displaySearchBar, setDisplaySearchBar] = useState(false);
 
   const todos = isSearch ? todosState.searchResults : todosState.todos;
   const numCompleted = todos.filter((todo) => todo.isCompleted).length;
@@ -46,27 +53,45 @@ const TodoList = () => {
               </div>
               <div className="todo-list__options-container">
                 <div data-tip data-for="clearCompletedTip">
-                  <FontAwesomeIcon icon={["fas", "times"]} />
+                  {displayCompleted ? (
+                    <FontAwesomeIcon
+                      icon={["fas", "list"]}
+                      onClick={() => dispatch(hideCompleted())}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={["fas", "tasks"]}
+                      onClick={() => dispatch(showCompleted())}
+                    />
+                  )}
                 </div>
                 <ReactTooltip
                   id="clearCompletedTip"
                   place="top,bottom"
                   {...toolkitConfig}
                 >
-                  Clear Completed
+                  {displayCompleted ? "Hide Completed" : "Show Completed"}
                 </ReactTooltip>
-                <div data-tip data-for="searchTip">
-                  <FontAwesomeIcon icon={["fas", "search"]} />
-                </div>
-                <ReactTooltip
-                  id="searchTip"
-                  place="top,bottom"
-                  {...toolkitConfig}
-                >
-                  Search
-                </ReactTooltip>
+                {displaySearchBar ? (
+                  <SearchBar />
+                ) : (
+                  <div>
+                    <div data-tip data-for="searchTip">
+                      <FontAwesomeIcon
+                        icon={["fas", "search"]}
+                        onClick={() => setDisplaySearchBar(true)}
+                      />
+                    </div>
+                    <ReactTooltip
+                      id="searchTip"
+                      place="top,bottom"
+                      {...toolkitConfig}
+                    >
+                      Search
+                    </ReactTooltip>
+                  </div>
+                )}
               </div>
-              {/* <SearchBar /> */}
             </div>
             <div className="todo-list__todos">
               {isSearch && todos.length === 0 ? (
@@ -90,8 +115,12 @@ const TodoList = () => {
                     Create todo for "{searchPhrase}"
                   </button>
                 </div>
-              ) : (
+              ) : displayCompleted ? (
                 todos.map((todo) => <Todo key={todo.id} todo={todo} />)
+              ) : (
+                todos
+                  .filter((todo) => !todo.isCompleted)
+                  .map((todo) => <Todo key={todo.id} todo={todo} />)
               )}
             </div>
           </div>

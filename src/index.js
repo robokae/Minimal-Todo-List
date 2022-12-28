@@ -13,6 +13,10 @@ import {
   faChevronDown,
   faFileAlt,
   faCalendar,
+  faList,
+  faTasks,
+  faExclamationCircle,
+  faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
 import { faStar, faSquare, faClock } from "@fortawesome/free-regular-svg-icons";
 import "./sass/main.scss";
@@ -41,7 +45,11 @@ library.add(
   faTimes,
   faFileAlt,
   faCalendar,
-  faClock
+  faClock,
+  faList,
+  faTasks,
+  faExclamationCircle,
+  faExclamationTriangle
 );
 
 store.subscribe(() => saveState(store.getState()));

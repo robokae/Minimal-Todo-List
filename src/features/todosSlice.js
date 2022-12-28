@@ -7,6 +7,7 @@ export const todosSlice = createSlice({
     searchResults: [],
     searchPhrase: "",
     isSearch: false,
+    displayCompleted: true,
   },
   reducers: {
     addTodo: (state, action) => {
@@ -47,11 +48,17 @@ export const todosSlice = createSlice({
     unsetSelected: (state, action) => {
       state.selected.filter((t) => t.id !== action.payload.id);
     },
-    setDisplayDeleteOptions: (state, action) => {
+    showDeleteOptions: (state, action) => {
       state.todos.forEach((todo) => {
         if (todo.id === action.payload)
           todo.displayDeleteOptions = !todo.displayDeleteOptions;
       });
+    },
+    showCompleted: (state) => {
+      state.displayCompleted = true;
+    },
+    hideCompleted: (state) => {
+      state.displayCompleted = false;
     },
   },
 });
@@ -64,6 +71,8 @@ export const {
   setCompleted,
   setSelected,
   unsetSelected,
-  setDisplayDeleteOptions,
+  showDeleteOptions,
+  showCompleted,
+  hideCompleted,
 } = todosSlice.actions;
 export default todosSlice.reducer;

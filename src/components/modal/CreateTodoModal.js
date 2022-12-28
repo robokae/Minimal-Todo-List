@@ -4,6 +4,7 @@ import { Calendar } from "react-calendar";
 import { useDispatch, useSelector } from "react-redux";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import uuid from "react-uuid";
+import alertConfig from "../../config/alertConfig";
 import {
   chooseDate,
   clearDate,
@@ -12,18 +13,30 @@ import {
 } from "../../features/datePickerSlice";
 import { closeCreateTodoModal } from "../../features/modalsSlice";
 import { addTodo } from "../../features/todosSlice";
+import {
+  closeWarningMessages,
+  showWarningMessage,
+} from "../../features/warningMessageSlice";
+import AlertMessage from "../AlertMessage";
 
 const CreateTodoModal = () => {
   const dispatch = useDispatch();
+  const { todos } = useSelector((store) => store.todos);
   const { displayDatePicker, chosenDate } = useSelector(
     (store) => store.datePicker
   );
+  const { warningMessages } = useSelector((store) => store.warningMessage);
   const [todoPriority, setTodoPriority] = useState("normal");
   const [date, setDate] = useState(null);
   const todoInput = useRef();
   const todoDetails = useRef("");
 
+  const warningMessageTypes = ["duplicateTodo", "invalidDate"];
+  const { duplicateTodo, invalidDate } = alertConfig;
+
   const closeModal = () => {
+    // Close all warning messages
+    dispatch(closeWarningMessages(warningMessageTypes));
     dispatch(clearDate());
     dispatch(closeCreateTodoModal());
   };
@@ -33,6 +46,22 @@ const CreateTodoModal = () => {
     const todoTitle = todoInput.current.value.trim();
 
     if (todoTitle !== "") {
+      /*
+       * Display an error message when the user tries to create a todo that
+       * already exists
+       * However, if the error message is shown and the user wants to create the
+       * duplicated todo, then allow them to do so
+       */
+      if (
+        todos.findIndex(
+          (todo) => todo.title.toLowerCase() === todoTitle.toLowerCase()
+        ) !== -1 &&
+        !warningMessages.duplicateTodo
+      ) {
+        dispatch(showWarningMessage("duplicateTodo"));
+        return;
+      }
+
       dispatch(
         addTodo({
           id: uuid(),
@@ -52,16 +81,9 @@ const CreateTodoModal = () => {
 
   const priorities = ["low", "normal", "medium", "high"];
 
-  const handleCloseModal = () => {
-    closeModal();
-  };
-
   return (
     <div className="create-todo-modal">
-      <div
-        className="create-todo-modal__overlay"
-        onClick={handleCloseModal}
-      ></div>
+      <div className="create-todo-modal__overlay" onClick={closeModal}></div>
       <div className="create-todo-modal__content">
         <form
           className="create-todo-modal__create-todo-form"
@@ -74,11 +96,12 @@ const CreateTodoModal = () => {
             placeholder="Add a todo (press enter to create)"
             autoFocus="autofocus"
           />
-          {/* {displayWarningMessage.duplicateTodo && (
-            <p className="create-todo-modal__warning-message">
-              {warningMessages.duplicateTodo}
-            </p>
-          )} */}
+          {warningMessages.duplicateTodo && (
+            <AlertMessage
+              type={duplicateTodo.type}
+              message={duplicateTodo.message}
+            />
+          )}
           <div className="create-todo-modal__additional-details">
             <h5 className="create-todo-modal__additional-details__heading">
               Additional Details
@@ -122,10 +145,17 @@ const CreateTodoModal = () => {
                 {displayDatePicker && (
                   <div className="create-todo-modal__additional-details__due-date-calendar">
                     <Calendar onChange={setDate} />
+                    {warningMessages.invalidDate && (
+                      <AlertMessage
+                        type={invalidDate.type}
+                        message={invalidDate.message}
+                      />
+                    )}
                     <div className="create-todo-modal__additional-details__due-date-calendar-options">
                       <button
                         className="create-todo-modal__action-button"
                         onClick={() => {
+                          dispatch(closeWarningMessages(["invalidDate"]));
                           dispatch(closeDatePicker());
                         }}
                       >
@@ -134,11 +164,17 @@ const CreateTodoModal = () => {
                       <button
                         className="create-todo-modal__action-button 
                         create-todo-modal__action-button--success"
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.preventDefault();
                           if (date !== null) {
-                            dispatch(chooseDate(date.toString()));
+                            if (date.getDate() < new Date().getDate()) {
+                              dispatch(showWarningMessage("invalidDate"));
+                            } else {
+                              dispatch(chooseDate(date.toString()));
+                              dispatch(closeWarningMessages(["invalidDate"]));
+                              dispatch(closeDatePicker());
+                            }
                           }
-                          dispatch(closeDatePicker());
                         }}
                       >
                         Done
@@ -163,7 +199,7 @@ const CreateTodoModal = () => {
             <button
               type="button"
               className="create-todo-modal__action-button"
-              onClick={handleCloseModal}
+              onClick={closeModal}
             >
               Cancel
             </button>

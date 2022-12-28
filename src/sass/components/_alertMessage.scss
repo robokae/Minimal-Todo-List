@@ -1,0 +1,15 @@
+@import "../abstracts/variables";
+
+.alert-message {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem;
+    border-radius: .25rem;
+
+    &--warning {
+        background-color: lighten($warning-color, 25%);
+        color: darken($warning-color, 15%);
+    }
+}

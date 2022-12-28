@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import ReactTooltip from "react-tooltip";
 import toolkitConfig from "../../config/toolkitConfig";
-import { closeSearch, searchTodo } from "../../features/todos/todosSlice";
+import { closeSearch, searchTodo } from "../../features/todosSlice";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
