@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import ReactTooltip from "react-tooltip";
 import toolkitConfig from "../../config/toolkitConfig";
+import { collapseSearchBar } from "../../features/searchBarSlice";
 import { closeSearch, searchTodo } from "../../features/todosSlice";
 
 const SearchBar = () => {
@@ -25,19 +26,22 @@ const SearchBar = () => {
         placeholder="Search"
         autoComplete="off"
         onChange={() => {
-          searchInput.current.value === ""
-            ? dispatch(closeSearch())
-            : dispatch(searchTodo(searchInput.current.value.trim()));
+          if (searchInput.current.value === "") {
+            dispatch(closeSearch());
+          } else {
+            dispatch(searchTodo(searchInput.current.value.trim()));
+          }
         }}
       />
       <ReactTooltip id="clearTip" place="top,bottom" {...toolkitConfig}>
-        Clear
+        Close Search
       </ReactTooltip>
       <div data-tip data-for="clearTip">
         <FontAwesomeIcon
           icon={faTimes}
           className="search-bar__close-button"
           onClick={() => {
+            dispatch(collapseSearchBar());
             dispatch(closeSearch());
             searchInput.current.value = "";
           }}

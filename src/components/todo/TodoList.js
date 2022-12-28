@@ -12,12 +12,13 @@ import uuid from "react-uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactTooltip from "react-tooltip";
 import toolkitConfig from "../../config/toolkitConfig";
+import { expandSearchBar } from "../../features/searchBarSlice";
 
 const TodoList = () => {
   const todosState = useSelector((store) => store.todos);
+  const { displaySearchBar } = useSelector((store) => store.searchBar);
   const dispatch = useDispatch();
   const { isSearch, searchPhrase, displayCompleted } = todosState;
-  const [displaySearchBar, setDisplaySearchBar] = useState(false);
 
   const todos = isSearch ? todosState.searchResults : todosState.todos;
   const numCompleted = todos.filter((todo) => todo.isCompleted).length;
@@ -79,7 +80,7 @@ const TodoList = () => {
                     <div data-tip data-for="searchTip">
                       <FontAwesomeIcon
                         icon={["fas", "search"]}
-                        onClick={() => setDisplaySearchBar(true)}
+                        onClick={() => dispatch(expandSearchBar())}
                       />
                     </div>
                     <ReactTooltip
