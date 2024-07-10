@@ -1,15 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import Home from "./views/Home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { Error, Home, Login, Register, Landing, Settings } from "./views";
 import "./sass/main.scss";
-import Error from "./views/ErrorPage";
 import Navbar from "./components/navbar/Navbar";
-import Login from "./views/Login";
-import Register from "./views/Register";
-import Landing from "./views/Landing";
-import Settings from "./views/Settings";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { saveState } from "./localStorage";
@@ -22,29 +16,12 @@ library.add(faIcons);
 store.subscribe(() => saveState(store.getState()));
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/landing",
-    element: <Landing />,
-  },
-  {
-    path: "/settings",
-    element: <Settings />,
-  },
-  {
-    errorElement: <Error />,
-  },
+  { errorElement: <Error /> },
+  { path: "/", element: <Home /> },
+  { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> },
+  { path: "/landing", element: <Landing /> },
+  { path: "/settings", element: <Settings /> },
 ]);
 
 const root = createRoot(document.getElementById("root"));
