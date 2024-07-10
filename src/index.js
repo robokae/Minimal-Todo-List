@@ -3,22 +3,6 @@ import ReactDOM from "react-dom";
 import Home from "./views/Home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faCheckSquare,
-  faTrash,
-  faEllipsisH,
-  faTimes,
-  faPlus,
-  faSearch,
-  faChevronDown,
-  faFileAlt,
-  faCalendar,
-  faList,
-  faTasks,
-  faExclamationCircle,
-  faExclamationTriangle,
-} from "@fortawesome/free-solid-svg-icons";
-import { faStar, faSquare, faClock } from "@fortawesome/free-regular-svg-icons";
 import "./sass/main.scss";
 import Error from "./views/ErrorPage";
 import Navbar from "./components/navbar/Navbar";
@@ -29,28 +13,10 @@ import Settings from "./views/Settings";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { saveState } from "./localStorage";
+import faIcons from "./config/iconConfig";
 
 // Add icons to library so that they can be used globally
-library.add(
-  faSquare,
-  faCheckSquare,
-  faStar,
-  faTrash,
-  faEllipsisH,
-  faTimes,
-  faPlus,
-  faSearch,
-  faTrash,
-  faChevronDown,
-  faTimes,
-  faFileAlt,
-  faCalendar,
-  faClock,
-  faList,
-  faTasks,
-  faExclamationCircle,
-  faExclamationTriangle
-);
+library.add(faIcons);
 
 store.subscribe(() => saveState(store.getState()));
 
