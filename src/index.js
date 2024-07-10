@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import { saveState } from "./localStorage";
 import faIcons from "./config/iconConfig";
+import { createRoot } from "react-dom/client";
 
 // Add icons to library so that they can be used globally
 library.add(faIcons);
@@ -46,10 +47,10 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.render(
+const root = createRoot(document.getElementById("root"));
+root.render(
   <Provider store={store}>
     <Navbar />
     <RouterProvider router={router} />
-  </Provider>,
-  document.getElementById("root")
+  </Provider>
 );
