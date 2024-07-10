@@ -10,7 +10,7 @@ import {
 } from "../../features/todosSlice";
 import uuid from "react-uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ReactTooltip from "react-tooltip";
+import { Tooltip } from "react-tooltip";
 import toolkitConfig from "../../config/toolkitConfig";
 import { expandSearchBar } from "../../features/searchBarSlice";
 
@@ -66,13 +66,13 @@ const TodoList = () => {
                     />
                   )}
                 </div>
-                <ReactTooltip
+                <Tooltip
                   id="clearCompletedTip"
                   place="top,bottom"
                   {...toolkitConfig}
                 >
                   {displayCompleted ? "Hide Completed" : "Show Completed"}
-                </ReactTooltip>
+                </Tooltip>
                 {displaySearchBar ? (
                   <SearchBar />
                 ) : (
@@ -83,13 +83,13 @@ const TodoList = () => {
                         onClick={() => dispatch(expandSearchBar())}
                       />
                     </div>
-                    <ReactTooltip
+                    <Tooltip
                       id="searchTip"
                       place="top,bottom"
                       {...toolkitConfig}
                     >
                       Search
-                    </ReactTooltip>
+                    </Tooltip>
                   </div>
                 )}
               </div>

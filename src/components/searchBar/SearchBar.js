@@ -2,10 +2,10 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import ReactTooltip from "react-tooltip";
 import toolkitConfig from "../../config/toolkitConfig";
 import { collapseSearchBar } from "../../features/searchBarSlice";
 import { closeSearch, searchTodo } from "../../features/todosSlice";
+import { Tooltip } from "react-tooltip";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ const SearchBar = () => {
         ref={searchInput}
         className="search-bar__input"
         placeholder="Search"
+        autoFocus="true"
         autoComplete="off"
         onChange={() => {
           if (searchInput.current.value === "") {
@@ -33,9 +34,9 @@ const SearchBar = () => {
           }
         }}
       />
-      <ReactTooltip id="clearTip" place="top,bottom" {...toolkitConfig}>
+      <Tooltip id="clearTip" place="top,bottom" {...toolkitConfig}>
         Close Search
-      </ReactTooltip>
+      </Tooltip>
       <div data-tip data-for="clearTip">
         <FontAwesomeIcon
           icon={faTimes}

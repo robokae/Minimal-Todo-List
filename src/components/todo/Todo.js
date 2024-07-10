@@ -2,8 +2,8 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
 import { deleteTodo, setCompleted } from "../../features/todosSlice";
-import ReactTooltip from "react-tooltip";
 import toolkitConfig from "../../config/toolkitConfig";
+import { Tooltip } from "react-tooltip";
 
 const Todo = ({ todo }) => {
   const { title, isCompleted } = todo;
@@ -27,9 +27,9 @@ const Todo = ({ todo }) => {
           <div data-tip data-for="starTodoTip">
             <FontAwesomeIcon icon={["far", "star"]} className="todo__icon" />
           </div>
-          <ReactTooltip id="starTodoTip" place="top,bottom" {...toolkitConfig}>
+          <Tooltip id="starTodoTip" place="top,bottom" {...toolkitConfig}>
             Star
-          </ReactTooltip>
+          </Tooltip>
           <div data-tip data-for="deleteTip">
             <FontAwesomeIcon
               icon={["fas", "trash"]}
@@ -37,18 +37,18 @@ const Todo = ({ todo }) => {
               onClick={() => dispatch(deleteTodo(todo.id))}
             />
           </div>
-          <ReactTooltip id="deleteTip" place="top,bottom" {...toolkitConfig}>
+          <Tooltip id="deleteTip" place="top,bottom" {...toolkitConfig}>
             Delete
-          </ReactTooltip>
+          </Tooltip>
           <div data-tip data-for="optionsTip">
             <FontAwesomeIcon
               icon={["fas", "ellipsis-h"]}
               className="todo__icon"
             />
           </div>
-          <ReactTooltip id="optionsTip" place="top,bottom" {...toolkitConfig}>
+          <Tooltip id="optionsTip" place="top,bottom" {...toolkitConfig}>
             Options
-          </ReactTooltip>
+          </Tooltip>
         </div>
       </div>
     </div>
